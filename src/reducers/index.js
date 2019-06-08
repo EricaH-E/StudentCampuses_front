@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import studentReducer from './students'; 
+import campusReducer from './campuses';
 
 //combineReducers function creates a single object that contains
 //a bunch of reducers 
 const rootReducer = combineReducers({
-    StudentList: studentReducer
+    StudentList: studentReducer,
+    CampusList: campusReducer
 }); 
 
 export default rootReducer; 
