@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from './navbar.js'
-import 'App.css';
+import '../styles/App.css';
 
 
 // const campusView = (props)=>{
@@ -24,20 +24,20 @@ class Campuses extends React.Component{
     }
     render(){
             
-            const singleCampus= this.state.campuses.map(campus=>{
+          /*  const singleCampus= this.props.campuses.map(campus=>{
                return(<campusView  name={campus.name}
                 numberOfStudents={campus.name}
                 image={campus.image}
             />)
-            });
+            }); */
         return(
             <div>
                 <header>
                      <h1>Campuses</h1>
                      <br />
                      <NavBar />  
-                    {this.props.campuses.length === 0? <h3>No Campuses to Display</h3> : <div>{singleCampus}</div> } 
-                </header>
+                 </header>
+                 <h3>No Campuses to Display</h3>
             </div>
         )
     }

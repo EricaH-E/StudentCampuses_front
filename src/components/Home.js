@@ -1,10 +1,10 @@
 import React from 'react';
-import campus from './campus.png';
-import student from './student.png';
-import add from './add.png';
+import campus from '../imgs/campus.png';
+import student from '../imgs/student.png';
+import add from '../imgs/add.png';
 import NavBar from './navbar.js'
 import { Link}from 'react-router-dom';
-import './App.css';
+import '../styles/App.css';
 
 
 class Home extends React.Component{
