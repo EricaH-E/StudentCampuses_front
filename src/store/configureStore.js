@@ -5,7 +5,7 @@ export default function configureStore(initialState) {
     
     //creatStore function creates the store
     const store = createStore(
-    rootReducer, //rootReucer updates our state tree 
+    rootReducer, //rootReducer updates our state tree 
     initialState,
     //allows Redux dev tools extention to acess our store 
     window.devToolsExtension ? window.devToolsExtension() : undefined
