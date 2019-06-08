@@ -1,9 +1,6 @@
 import React from 'react';
-import './App.css';
-import NavBar from './navbar';
-
-
-
+import 'App.css';
+import NavBar from './navbar.js';
 
 
 class Students extends React.Component{

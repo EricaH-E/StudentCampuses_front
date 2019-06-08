@@ -2,9 +2,9 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
 import NavBar from './navbar.js';
-import Home from './Home.js';
-import Students from './Students';
-import Campuses from './Campuses.js'
+import Home from "./components/Home.js";
+import Students from "./components/Students.js";
+import Campuses from "./components/Campuses";
 
 
 
