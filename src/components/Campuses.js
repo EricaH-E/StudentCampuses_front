@@ -1,22 +1,20 @@
 import React from 'react';
 import NavBar from './navbar.js'
-import './App.css';
+import 'App.css';
 
 
-const campusView = (props)=>{
-    {name, numberOfStudents, images} = props;
-    return(
-      <div>
-          <div className="campus-icon">{image}</div>
-          <div className="campus-name">{name}</div>
-          <div className="numOfStud">{numberOfStudents}</div>
-      </div>
-    )
+// const campusView = (props)=>{
+//     {name, numberOfStudents, images} = props;
+//     return(
+//       <div>
+//           <div className="campus-icon">{image}</div>
+//           <div className="campus-name">{name}</div>
+//           <div className="numOfStud">{numberOfStudents}</div>
+//       </div>
+//     )
 
-}
+// }
   
-  
-
 class Campuses extends React.Component{
     constructor(props){
         super(props);
