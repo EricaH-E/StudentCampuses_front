@@ -54,6 +54,30 @@ header{
 }
 
 
+/* Campus Page */
+
+#add-campus{
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.campus-wrapper{
+  display: flex;
+  justify-content: space-around;
+}
+.multi-view{
+  border: 2px solid black;
+  padding: 50px;
+}
+
+
+.campus-icon{
+  border: 2px solid black;
+  padding: 30px;
+}
+
+
 
 
 
