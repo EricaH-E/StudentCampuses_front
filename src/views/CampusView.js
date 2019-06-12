@@ -1,22 +1,17 @@
 import React from 'react';
 import '../styles/App.css';
+import def from '../imgs/def.png'
 
-class CampusView  extends React.Component{
-
-    render(){
-      
-        return(
-          <div>
+const CampusView = (props) => {
+    return(
           <div className="multi-view">
-            <h3>{this.props.name}</h3>
-             <p className="campus-icon">{this.props.image}</p>
-             <p className="numOfStud">Students: {this.props.numberOfStudents}</p>
-             <button onClick>EDIT</button> <button>DELETE</button>
-          </div>
+              <h3>{props.campus.name}</h3>
+              <img src={def} alt="student"></img>
+             <p className="numOfStud">Students: {props.campus.numberOfStudents}</p>
+
           </div>
         )
     }
     
-    }
 
     export default CampusView ; 

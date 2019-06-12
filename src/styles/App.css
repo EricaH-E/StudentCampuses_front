@@ -71,6 +71,12 @@ header{
   padding: 50px;
 }
 
+.multi-view img{
+  max-width: 65%;
+  max-height: 65%;
+  align-self: center;
+}
+
 
 .campus-icon{
   border: 2px solid black;

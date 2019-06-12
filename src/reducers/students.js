@@ -1,22 +1,40 @@
-/*returning dummy students to our store*/
+import {REQUEST_STUDENT_LIST, ADD_STUDENT, DELETE_STUDENT} from '../actions/index'
 
-/*student reducer function*/ 
-export default function() {
-    return [
+
+const initialState ={
+    data: [
         {
-            student_id: 1, 
+            id: 1, 
             first_name: 'Shanjida', 
             last_name: 'Akhter'
         },
         {
-            student_id: 2, 
+            id: 2, 
             first_name: 'Erica', 
             last_name: 'Helliston'
         },
         {
-            student_id: 3, 
+            id: 3, 
             first_name: 'Josh', 
             last_name: 'Hutcherson'
         }
-    ]; 
+    ]
 }
+
+/* reducer for all Students */
+
+export default function(state = initialState, action){
+    switch(action.type){
+        case REQUEST_STUDENT_LIST:
+                return {
+                    ...state, data: action.payload.data
+                  };
+        case ADD_STUDENT:
+            return action.payload;
+
+        case DELETE_STUDENT:
+            return {}
+        default: return state;
+    }
+}
+

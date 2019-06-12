@@ -1,10 +1,10 @@
 import React from 'react';
-import {link, Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import NavBar from './navbar.js'
 import '../styles/App.css';
 import CampusView from '../views/CampusView';
-
-
+import def from '../imgs/def.png';
+import AddCampus from './AddCampus';
   
 class Campuses extends React.Component{
     constructor(props){
@@ -12,14 +12,14 @@ class Campuses extends React.Component{
         this.state={
             name: "",
             numberOfStudents: 0,
-            image:"SomeImage",
+            image: def,
             addCampus: false,
             redirect: false
             } 
   }
-  /*componentDidMount(){
-      this.props.actions.request_campus_list();
-  }*/
+  componentDidMount(){
+      this.props.actions.getAllCampusesThunk();
+  }
     addNewCampus = () => {
         this.setState({addCampus: true});
     }  
@@ -28,58 +28,36 @@ class Campuses extends React.Component{
         this.setState({name: event.target.value});
     }
     
-    handleSubmit = (event) =>{
-        event.preventDefault();
-        this.props.actions.add_campus(this.state.name,this.state.numberOfStudents, this.state.image);
+    handleSubmit = (obj) =>{
+        this.props.actions.addCampusThunk(obj);
         this.setState({addCampus: false});
-        /*redirect to single campus view */
         this.setState({redirect: true});
         
     }
     
-    render(){
-        /*console.log(typeof this.props.campusList);
-        console.log(this.props.campusList);*/
-        if(this.state.redirect){
-            return(
-            <Redirect to={{
-                pathname: 
-                state: { 
-                    name: this.state.name,
-                    students:  this.state.numberOfStudents,
-                    image: this.state.image
-
-                }
-            }} />
-            
-            )
+    handleCancel = () =>{
+        this.setState({addCampus: false});
     }
-
+    
+    render(){
         if(this.state.addCampus){
             return(
-                <div>
-                <header>
-                    <h1>Add New Campus</h1>
-                    <br />
-                    <NavBar />
-                    </header>
-                <br/>
-                <br />
-                <form onSubmit={this.handleSubmit}>
-                   Name:  <input type="text"  onChange={this.getName} required /> {' '}
-                   <input type="submit" value="SUBMIT" />
-                </form>
-                </div>
+                <AddCampus  cancel={this.handleCancel}  submit={this.handleSubmit}/>
             )
+        }
+        if(this.state.redirect){
+            return(<Redirect to={`Campuses/${this.props.campus}`} /> )
         }
 
            const singleCampus= this.props.campusList.map(campus=>{
-               return(<CampusView  name={campus.name}
-                numberOfStudents={campus.numberOfStudents}
-                image={campus.image}
-                key={campus.id}
-                id={campus.id}
-            />)
+               return(
+             <Link
+             key={campus.id}
+              to={`/Campuses/${campus.id}`}>
+                <CampusView campus={campus} test="test" />
+            </Link>
+    
+            )
             }); 
         return(
             <div>

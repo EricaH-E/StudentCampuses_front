@@ -1,22 +1,95 @@
 import React from 'react';
+import def from '../imgs/def.png'
 import NavBar from '../components/navbar';
+import {withRouter} from 'react-router';
+import CampusEdit from './CampusEdit';
 
 class SingleCampus extends React.Component{
+    constructor(props){
+        super(props);
+        this.state ={
+            edit: false,
+            delete: false,
+            currentId : ''
+        }
+    }
+    componentDidMount(){
+        const {id} = this.props.match.params;
+        this.setState({currentId :id})
+        this.props.actions.getSingleCampusThunk(id);
+    }
+
+    triggerEdit = () =>{
+        this.setState({edit: true});
+    }
+
+    triggerDelete = () =>{
+        this.setState({delete: true});
+    }
+
+    handleDelete = () =>{
+        /*trigger delete thunk */
+        this.props.actions.deleteCampusThunk(this.state.currentId);
+    }
+
+    handleEdit = (obj) =>{
+        /*trigger edit thunk and pass object */
+        this.props.actions.editCampusThunk(this.state.currentId, obj);
+    }
+
     render(){
-        console.log(this.props.location.state);
-        const {name, students, image} = this.props.location.state;
+        if(this.state.edit){
+            return( 
+                <CampusEdit  campus={this.props.campus}  grabChanges={this.state.handleEdit}/>
+            )
+        }
+
+        if(this.state.delete){
+            return(
+                <div>Deleted</div>
+            )
+        }
+
         return(
         <div>
             <header>
-                <h1>{name}</h1>
                 <NavBar />
             </header>
-            <p className="campus-icon">{image}</p>
-             <p className="numOfStud">Students: {students}</p>
-             <button onClick>EDIT</button> <button>DELETE</button> <button>ADD STUDENTS</button>
+            <div className="multi-view">
+              <h3>{this.props.campus.name}</h3>
+              <img src={def} alt="campus"></img>
+             <p className="numOfStud">Students: {this.props.campus.numberOfStudents}</p>
+             <button onClick={this.triggerEdit}>EDIT</button> <button onClick={this.triggerDelete}>DELETE</button>
+          </div>
+            <br/>
+          <div>
+          <button>ADD STUDENT</button> <button>REMOVE STUDENT</button>
+          <br />
+             <h3>Students belonging to {this.props.campus.name} : </h3>
+              
+              
+          </div>
+            
         </div>
         )
     }
 }
 
-export default SingleCampus;
+//if no students assigned to campus render no students assigned
+
+// export default SingleCampus;
+export default withRouter(SingleCampus);
+
+// mapping students to this campus  via filter & find
+
+/* let students= this.props.studentList.filter(student => student.campusId === this.state.currentId)
+.map(student => {
+    return (
+         <Link
+             key={student.id}
+              to={`/Students/${student.id}`}>
+                <StudentView student={student}  />
+            </Link>
+    )
+}
+    */

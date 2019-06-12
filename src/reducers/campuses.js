@@ -1,4 +1,4 @@
-import {ADD_CAMPUS, REQUEST_CAMPUS_LIST} from '../actions/index';
+import {ADD_CAMPUS, REQUEST_CAMPUS_LIST, DELETE_CAMPUS} from '../actions/index';
 
 const initialState ={ 
   data: [{ 
@@ -26,16 +26,12 @@ export default function(state= initialState, action){
          ...state, data: action.payload.data
        };
        case ADD_CAMPUS:
-          console.log("adding campus");
       return{
            ...state, 
-           data: [...state.data, {
-             id: action.id,
-             name: action.name,
-             numberOfStudents: action.numberOfStudents,
-             image: action.image
-           }]
+           data: [...state.data, action.payload ]
       }
+      case DELETE_CAMPUS:
+        return {}
        default:
         return state;
     }
