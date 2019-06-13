@@ -12,25 +12,17 @@ class Campuses extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            name: "",
-            numberOfStudents: 0,
-            imageUrl: def,
             addCampus: false,
             redirect: false
             } 
   }
   componentDidMount(){
       this.props.request_campus_list();
-      console.log(this.props.CampusList);
   }
     addNewCampus = () => {
         this.setState({addCampus: true});
     }  
 
-    getName = (event) => {
-        this.setState({name: event.target.value});
-    }
-    
     handleSubmit = (obj) =>{
         this.props.add_campus(obj);
         this.setState({addCampus: false});
@@ -50,12 +42,10 @@ class Campuses extends React.Component{
             )
         }
         if(this.state.redirect){
-            return(<Redirect to={`/Campuses/${this.props.CurrentCampus.id}`} /> )
+            return(<Redirect to={`Campuses/${this.props.CurrentCampus.id}`} /> )
         }
 
            const singleCampus= this.props.CampusList.map(campus=>{
-               /*const {id} = campus || ''*/
-               console.log(campus);
                return(
              <Link
               key={campus.id}

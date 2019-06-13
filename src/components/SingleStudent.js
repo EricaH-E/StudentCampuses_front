@@ -50,7 +50,7 @@ class SingleStudent extends React.Component{
         let imageUrl = this.props.CurrentStudent.imageUrl === "" ? def : this.props.CurrentStudent.imageUrl ;
         if(this.state.edit){
             return( 
-                <StudentEdit student={this.props.CurrentStudent}  grabChanges={this.state.handleEdit} />
+                <StudentEdit student={this.props.CurrentStudent}  grabChanges={this.handleEdit} />
             )
         }
 

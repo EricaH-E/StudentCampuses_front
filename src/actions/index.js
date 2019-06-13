@@ -42,10 +42,10 @@ export function delete_campus(campus){
 }
 
 
-export function edit_campus(obj){
+export function edit_campus(campus){
     return {
         type: EDIT_CAMPUS,
-        obj
+        payload: campus
     }
    }
 
@@ -115,16 +115,19 @@ export const getSingleCampusThunk = (id) => (dispatch) =>{
 export const addCampusThunk = (newCampus)=> (dispatch)=>{
     axios.post('/campus', newCampus)
     .then(result => result.data)
-    .then(data => dispatch(add_campus(data)))
-    .then(data => dispatch(request_campus(data)))
+    .then(data =>{ 
+    dispatch(add_campus(data));
+    dispatch(request_campus(data));
+    })
     .catch(error => console.log(error));
 }
 
 export const editCampusThunk = (id, update) => (dispatch)=>{
-    axios.patch(`/campus/${id}`, update)
+    axios.put(`/campus/${id}`, update)
     .then(result => result.data)
-    .then(data => dispatch(edit_campus(data))) //should return single campus from back end
-   .then(data => dispatch(request_campus(data)) )
+    .then(data => {dispatch(edit_campus(data));
+        dispatch(request_campus(data));
+    }) //should return single campus from back end
     .catch(error => console.log(error));
 }
 
@@ -153,11 +156,12 @@ export const getSingleStudentThunk = (id) =>(dispatch)=>{
 }
 
 export const addStudentThunk = (newStudent)=> (dispatch)=>{
-    console.log("thunk",newStudent)
     axios.post('/student', newStudent)
     .then(result => result.data)
-    .then(data => dispatch(add_student(data)))
-    .then(data => dispatch(request_student(data)))
+    .then(data => {
+        dispatch(add_student(data));
+        dispatch(request_student(data));
+    })
     .catch(error => console.log(error));
 
 }
@@ -165,8 +169,10 @@ export const addStudentThunk = (newStudent)=> (dispatch)=>{
 export const editStudentThunk = (id, update) => (dispatch)=>{
     axios.put(`/student/${id}`, update)
     .then(result => result.data)
-    .then(data => dispatch(edit_student(data))) //should return single campus from back end
-    .then(data => dispatch(request_student(data)))
+    .then(data => { 
+        dispatch(edit_student(data));
+        dispatch(request_student(data));
+     }) //should return single campus from back end
     .catch(error => console.log(error));
 
 } 

@@ -25,7 +25,6 @@ class AddStudent extends React.Component{
       submitted = (event) => {
           event.preventDefault();
           let  newstudent=  this.state;
-          console.log("form", newstudent)
           this.props.submit(newstudent);
       }
 
