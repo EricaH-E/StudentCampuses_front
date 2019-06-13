@@ -16,6 +16,7 @@ class SingleCampus extends React.Component{
         }
     }
     componentDidMount(){
+
         const {id} = this.props.match.params;
         this.setState({currentId :id})
         this.props.request_campus(id);
@@ -42,7 +43,7 @@ class SingleCampus extends React.Component{
     render(){
         if(this.state.edit){
             return( 
-                <CampusEdit  campus={this.props.campus}  grabChanges={this.state.handleEdit}/>
+                <CampusEdit  campus={this.props.CurrentCampus}  grabChanges={this.state.handleEdit}/>
             )
         }
 
@@ -58,16 +59,17 @@ class SingleCampus extends React.Component{
                 <NavBar />
             </header>
             <div className="multi-view">
-              <h3>{this.props.campus.name}</h3>
+              <h3>{this.props.CurrentCampus.name}</h3>
               <img src={def} alt="campus"></img>
-             <p className="numOfStud">Students: {this.props.campus.numberOfStudents}</p>
+              <p>Address: {this.props.CurrentCampus.address}</p>
+             <p>Description: {this.props.CurrentCampus.description} </p>
              <button onClick={this.triggerEdit}>EDIT</button> <button onClick={this.triggerDelete}>DELETE</button>
           </div>
             <br/>
           <div>
           <button>ADD STUDENT</button> <button>REMOVE STUDENT</button>
           <br />
-             <h3>Students belonging to {this.props.campus.name} : </h3>
+             <h3>Students belonging to {this.props.CurrentCampus.name} : </h3>
               
               
           </div>

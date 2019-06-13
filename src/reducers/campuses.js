@@ -22,10 +22,9 @@ import {ADD_CAMPUS, REQUEST_CAMPUS_LIST, DELETE_CAMPUS} from '../actions/index';
 export default function(state= [], action){
     switch(action.type){
       case  REQUEST_CAMPUS_LIST:
-       return {
-         ...state, data: action.payload.data
-       };
-       case ADD_CAMPUS:
+       return action.payload;
+       
+      case ADD_CAMPUS:
          return [...state, action.payload ]
       
       case DELETE_CAMPUS:

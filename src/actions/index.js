@@ -97,22 +97,23 @@ export function delete_student(student){
 
 /****** campus thunks ******/
 export const getAllCampusesThunk  = () => (dispatch) =>{
-    return axios.get('/api/Campuses')
+    return axios.get('/campus')
     .then( result => result.data)
     .then(data => dispatch(request_campus_list(data)))
+   /*.then(data => console.log(data))*/
     .catch (error => console.log(error));
 }
 
-export const getSingleCampusThunk = () => (dispatch) =>{ 
-    return axios.get('api/Campuses/:id')
+export const getSingleCampusThunk = (id) => (dispatch) =>{ 
+    return axios.get(`/campus/${id}`)
     .then(result => result.data)
-    .then(data => dispatch(request_campus(data)))
+    .then(data => dispatch(request_campus(data))) 
     .catch (error => console.log(error));
 }
     
 
 export const addCampusThunk = (newCampus)=> (dispatch)=>{
-    axios.post('/api/Campuses', newCampus)
+    axios.post('/campus', newCampus)
     .then(result => result.data)
     .then(data => dispatch(add_campus(data[0])))
     .then(data => dispatch(request_campus(data[1])))
@@ -120,24 +121,24 @@ export const addCampusThunk = (newCampus)=> (dispatch)=>{
 }
 
 export const editCampusThunk = (id, update) => (dispatch)=>{
-    axios.put(`/api/Campuses/${id}`, update)
+    axios.put(`/campus/${id}`, update)
     .then(result => result.data)
     .then(data => dispatch(edit_campus(data))) //should return single campus from back end
     .then(data => dispatch(request_campus(data.id)))
     .catch(error => console.log(error));
 }
 
-export const deleteCampusThunk = (id) =>{
-    return axios.delete(`api/Campuses/${id}`)
+export const deleteCampusThunk = (id) => (dispatch) => {
+    return axios.delete(`/campus/${id}`)
     .then(result=> result.data)
-    .then(dispatch(delete_campus(data)))
+    .then( data => dispatch(delete_campus(data)))
     .catch(error =>console.log(error))
     
 }
 
 /****** student thunks  ******/
 export const getAllStudentsThunk  = () => (dispatch)=>{
-    return axios.get('/api/Students')
+    return axios.get('/student')
     .then( result => result.data)
     .then(data => dispatch(request_student_list(data)))
     .catch (error => console.log(error));
@@ -145,14 +146,14 @@ export const getAllStudentsThunk  = () => (dispatch)=>{
 }
 
 export const getSingleStudentThunk = (id) =>(dispatch)=>{
-    return axios.get(`api/Students/${id}`)
+    return axios.get(`/student/${id}`)
     .then(result => result.data)
     .then(data => dispatch(request_student(data)))
     .catch (error => console.log(error));
 }
 
 export const addStudentThunk = (newStudent)=> (dispatch)=>{
-    axios.post('/api/Students', newStudent)
+    axios.post('/student', newStudent)
     .then(result => result.data)
     .then(data => dispatch(add_student(data[0])))
     .then(data => dispatch(request_student(data[1])))
@@ -161,7 +162,7 @@ export const addStudentThunk = (newStudent)=> (dispatch)=>{
 }
 
 export const editStudentThunk = (id, update) => (dispatch)=>{
-    axios.put(`/api/Students/${id}`, update)
+    axios.put(`/student/${id}`, update)
     .then(result => result.data)
     .then(data => dispatch(edit_student(data))) //should return single campus from back end
     .then(data => dispatch(request_student(data.id)))
@@ -170,9 +171,9 @@ export const editStudentThunk = (id, update) => (dispatch)=>{
 } 
 
 export const deleteStudentThunk = (id) => (dispatch)=>{
-    return axios.delete(`api/Students/${id}`)
+    return axios.delete(`/student/${id}`)
     .then(result => result.data)
-    .then(dispatch(delete_student(data)))
+    .then( data => dispatch(delete_student(data)))
     .catch(error =>console.log(error))
     
 }  

@@ -22,8 +22,8 @@ class AddCampus extends React.Component{
 
       submitted = (event) => {
         event.preventDefault();
-        let email= RegExp('^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$');
-        let address = RegExp("A-Za-z0-9'\.\-\s\,");
+        /*let email= RegExp('^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$');
+        let address = RegExp("A-Za-z0-9'\.\-\s\,"); */
         if( this.state.name === '' || this.state.address === ''){
             alert('Campus Name and address be filled out befor submitting New campus');
         }

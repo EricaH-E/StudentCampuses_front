@@ -14,13 +14,14 @@ class Campuses extends React.Component{
         this.state={
             name: "",
             numberOfStudents: 0,
-            image: def,
+            imageUrl: def,
             addCampus: false,
             redirect: false
             } 
   }
   componentDidMount(){
       this.props.request_campus_list();
+      console.log(this.props.CampusList);
   }
     addNewCampus = () => {
         this.setState({addCampus: true});
