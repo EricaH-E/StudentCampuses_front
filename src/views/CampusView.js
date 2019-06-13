@@ -7,7 +7,9 @@ const CampusView = (props) => {
           <div className="multi-view">
               <h3>{props.campus.name}</h3>
               <img src={def} alt="student"></img>
-             <p className="numOfStud">Students: {props.campus.numberOfStudents}</p>
+             <p>Address: {props.campus.address}</p>
+             <p>Description: {props.campus.description} </p>
+
 
           </div>
         )

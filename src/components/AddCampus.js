@@ -6,7 +6,7 @@ class AddCampus extends React.Component{
 
     constructor(props){
         super(props);
-            this.setState ={
+            this.state ={
                 name: '',
                 address: '',
                 imageUrl: '',
@@ -22,15 +22,9 @@ class AddCampus extends React.Component{
 
       submitted = (event) => {
         event.preventDefault();
-        let email= RegExp('^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$');
-        let address = RegExp("A-Za-z0-9'\.\-\s\,");
-        if( this.state.name === '' || this.state.address === ''){
-            alert('Campus Name and address be filled out befor submitting New campus');
-        }
-        else{
           let  newcampus=  this.state;
           this.props.submit(newcampus);
-        }
+       
       }
 
     render(){
@@ -45,13 +39,13 @@ class AddCampus extends React.Component{
         <br />
         <form  onSubmit={this.submitted}>
         <label>Name:{" "}
-            <input type="text" name="name"  required />
+            <input type="text" name="name" onChange={this.handleChange} required />
          </label>
 
          <br />
 
             <label>Address:{" "}
-            <input type="text"  name = "address" required/>
+            <input type="text"  name = "address" onChange={this.handleChange} required/>
             </label>
 
             <br />
@@ -66,7 +60,7 @@ class AddCampus extends React.Component{
             <br />
 
             <label>Description:{" "}
-            <input type="text" name="description" />
+            <input type="text" name="description" onChange={this.handleChange} />
             </label>
             <br />
            <input type="submit" value="SUBMIT" /> <button onClick={this.props.cancel}>CANCEL</button>

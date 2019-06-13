@@ -1,5 +1,6 @@
 import React from 'react';
-import def from '../imgs/def.png'
+import def from '../imgs/def.png';
+import {Redirect} from 'react-router-dom';
 import NavBar from '../components/navbar';
 import {withRouter} from 'react-router';
 import StudentEdit from './StudentEdit'
@@ -28,6 +29,7 @@ class SingleStudent extends React.Component{
     }
 
     triggerDelete = () =>{
+        this.props.delete_student(this.state.currentId);
         this.setState({delete: true});
     }
 
@@ -45,16 +47,17 @@ class SingleStudent extends React.Component{
 
 
     render(){
+        let imageUrl = this.props.CurrentStudent.imageUrl === "" ? def : this.props.CurrentStudent.imageUrl ;
         if(this.state.edit){
             return( 
-                <StudentEdit student={this.props.student}  grabChanges={this.state.handleEdit} />
+                <StudentEdit student={this.props.CurrentStudent}  grabChanges={this.handleEdit} />
             )
         }
 
 
         if(this.state.delete){
             return(
-                <div>Deleted</div>
+                <Redirect to="/Students" />
             )
         }
 
@@ -65,13 +68,14 @@ class SingleStudent extends React.Component{
                     <NavBar />
                 </header>
             <div className="multi-view">
-              <img src={def} alt="student"></img>
-              <h3>{this.props.student.first_name}{" "}{this.props.student.last_name}</h3>
+              <img src={imageUrl} alt="student"></img>
+              <h3>{this.props.CurrentStudent.firstName}{" "}{this.props.CurrentStudent.lastName}</h3>
+              <p> GPA: {this.props.CurrentStudent.gpa}</p>
+              <p>Email: {this.props.CurrentStudent.email}</p>
              <button onClick={this.triggerEdit}>EDIT</button> <button onClick={this.triggerDelete}>DELETE</button>
           </div>
           <br />
           <button>ADD/CHANGE CAMPUS</button>
-          <h3>CAMPUS</h3> 
           </div>
         )
     }

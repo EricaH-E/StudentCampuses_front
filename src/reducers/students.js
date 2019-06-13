@@ -26,7 +26,7 @@ import {REQUEST_STUDENT_LIST, ADD_STUDENT, DELETE_STUDENT} from '../actions/inde
 export default function(state = [], action){
     switch(action.type){
         case REQUEST_STUDENT_LIST:
-                return action.payload
+                return  action.payload
         case ADD_STUDENT:
             return [...state, action.payload];
 
