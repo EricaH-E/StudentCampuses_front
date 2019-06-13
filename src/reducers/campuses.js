@@ -26,12 +26,10 @@ export default function(state= [], action){
          ...state, data: action.payload.data
        };
        case ADD_CAMPUS:
-      return{
-           ...state, 
-           data: [...state.data, action.payload ]
-      }
+         return [...state, action.payload ]
+      
       case DELETE_CAMPUS:
-        return {}
+        return [...state, state.filter(campus => campus.id !== action.payload.id ) ]
        default:
         return state;
     }

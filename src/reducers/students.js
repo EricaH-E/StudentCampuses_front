@@ -28,10 +28,10 @@ export default function(state = [], action){
         case REQUEST_STUDENT_LIST:
                 return action.payload
         case ADD_STUDENT:
-            return action.payload;
+            return [...state, action.payload];
 
         case DELETE_STUDENT:
-            return {}
+            return [...state, state.filter(student => student.id !== action.payload.id ) ];
         default: return state;
     }
 }

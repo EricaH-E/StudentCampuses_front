@@ -34,9 +34,10 @@ export function add_campus(list){
     
 }
 
-export function delete_campus(){
+export function delete_campus(campus){
  return {
      type: DELETE_CAMPUS,
+     payload: campus
  };
 }
 
@@ -71,16 +72,17 @@ export function add_student(list){
     }
 }
 
-export function edit_student(student){
+export function edit_student(student){ 
     return{
         type: EDIT_STUDENT,
         payload: student
     }
 }
 
-export function delete_student(){
+export function delete_student(student){
     return{
-        type: DELETE_STUDENT
+        type: DELETE_STUDENT,
+        payload: student
     }
 }
 
@@ -120,14 +122,15 @@ export const addCampusThunk = (newCampus)=> (dispatch)=>{
 export const editCampusThunk = (id, update) => (dispatch)=>{
     axios.put(`/api/Campuses/${id}`, update)
     .then(result => result.data)
-    .then(data => dispatch(edit_campus(data[0]))) //should return single campus from back end
-    .then(data => dispatch(request_campus(data[1])))
+    .then(data => dispatch(edit_campus(data))) //should return single campus from back end
+    .then(data => dispatch(request_campus(data.id)))
     .catch(error => console.log(error));
 }
 
 export const deleteCampusThunk = (id) =>{
     return axios.delete(`api/Campuses/${id}`)
-    .then(response => console.log(response))
+    .then(result=> result.data)
+    .then(dispatch(delete_campus(data)))
     .catch(error =>console.log(error))
     
 }
@@ -160,16 +163,16 @@ export const addStudentThunk = (newStudent)=> (dispatch)=>{
 export const editStudentThunk = (id, update) => (dispatch)=>{
     axios.put(`/api/Students/${id}`, update)
     .then(result => result.data)
-    .then(data => dispatch(edit_student(data[0]))) //should return single campus from back end
-    .then(data => dispatch(request_student(data[1])))
+    .then(data => dispatch(edit_student(data))) //should return single campus from back end
+    .then(data => dispatch(request_student(data.id)))
     .catch(error => console.log(error));
 
 } 
 
 export const deleteStudentThunk = (id) => (dispatch)=>{
     return axios.delete(`api/Students/${id}`)
-    .then(response => console.log(response))
-    .then(dispatch(delete_student()))
+    .then(result => result.data)
+    .then(dispatch(delete_student(data)))
     .catch(error =>console.log(error))
     
-} 
+}  
