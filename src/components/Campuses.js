@@ -49,12 +49,13 @@ class Campuses extends React.Component{
                 <AddCampus  cancel={this.handleCancel}  submit={this.handleSubmit}/>
             )
         }
-        /*if(this.state.redirect){
-            return(<Redirect to={`Campuses/${this.props.CurrentCampus.id}`} /> )
-        }*/
+        if(this.state.redirect){
+            return(<Redirect to={`/Campuses/${this.props.CurrentCampus.id}`} /> )
+        }
 
            const singleCampus= this.props.CampusList.map(campus=>{
-               const {id} = campus || ''
+               /*const {id} = campus || ''*/
+               console.log(campus);
                return(
              <Link
               key={campus.id}

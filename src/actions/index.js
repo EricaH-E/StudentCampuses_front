@@ -115,8 +115,8 @@ export const getSingleCampusThunk = (id) => (dispatch) =>{
 export const addCampusThunk = (newCampus)=> (dispatch)=>{
     axios.post('/campus', newCampus)
     .then(result => result.data)
-    .then(data => dispatch(add_campus(data[0])))
-    .then(data => dispatch(request_campus(data[1])))
+    .then(data => dispatch(add_campus(data)))
+    .then(data => dispatch(request_campus(data)))
     .catch(error => console.log(error));
 }
 

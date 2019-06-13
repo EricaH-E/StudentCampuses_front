@@ -1,5 +1,6 @@
 import React from 'react';
-import def from '../imgs/def.png'
+import def from '../imgs/def.png';
+import {Redirect} from 'react-router-dom';
 import NavBar from '../components/navbar';
 import {withRouter} from 'react-router';
 import StudentEdit from './StudentEdit'
@@ -28,6 +29,7 @@ class SingleStudent extends React.Component{
     }
 
     triggerDelete = () =>{
+        this.props.delete_student(this.state.currentId);
         this.setState({delete: true});
     }
 
@@ -55,7 +57,7 @@ class SingleStudent extends React.Component{
 
         if(this.state.delete){
             return(
-                <div>Deleted</div>
+                <Redirect to="/Students" />
             )
         }
 
