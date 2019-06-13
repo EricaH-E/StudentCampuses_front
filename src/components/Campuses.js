@@ -1,33 +1,67 @@
 import React from 'react';
+import {Link, Redirect} from 'react-router-dom';
 import NavBar from './navbar.js'
 import '../styles/App.css';
 import CampusView from '../views/CampusView';
-
-
+import def from '../imgs/def.png';
+import AddCampus from './AddCampus';
+import {connect} from 'react-redux';
+import {getAllCampusesThunk, addCampusThunk }from '../actions/index';
   
 class Campuses extends React.Component{
     constructor(props){
         super(props);
-        /*this.state={
-            campusList: [
-                { name:"Campus1", numberOfStudents:"5 ",image:"SomeImage "},
-                { name:"Campus2", numberOfStudents:"2 ",image:"SomeImage2"}
-              ]
-            } */
-        }
-          
+        this.state={
+            name: "",
+            numberOfStudents: 0,
+            image: def,
+            addCampus: false,
+            redirect: false
+            } 
+  }
+  componentDidMount(){
+      this.props.request_campus_list();
+  }
+    addNewCampus = () => {
+        this.setState({addCampus: true});
+    }  
+
+    getName = (event) => {
+        this.setState({name: event.target.value});
+    }
+    
+    handleSubmit = (obj) =>{
+        this.props.add_campus();
+        this.setState({addCampus: false});
+        this.setState({redirect: true});
+        
+    }
+
+    
+    handleCancel = () =>{
+        this.setState({addCampus: false});
+    }
     
     render(){
-        console.log(this.props.campusList);
-            
-           const singleCampus= this.props.campusList.map(campus=>{
-               return(<CampusView  name={campus.name}
-                numberOfStudents={campus.numberOfStudents}
-                image={campus.image}
-                key={campus.id}
-            />)
+        if(this.state.addCampus){
+            return(
+                <AddCampus  cancel={this.handleCancel}  submit={this.handleSubmit}/>
+            )
+        }
+        if(this.state.redirect){
+            return(<Redirect to={`Campuses/${this.props.campus}`} /> )
+        }
+
+           const singleCampus= this.props.CampusList.map(campus=>{
+               return(
+             <Link
+             key={campus.id}
+              to={`/Campuses/${campus.id}`}>
+                <CampusView campus={campus} test="test" />
+            </Link>
+    
+            )
             }); 
-            console.log(singleCampus);
         return(
             <div>
                 <header>
@@ -35,11 +69,28 @@ class Campuses extends React.Component{
                      <br />
                      <NavBar />  
                 </header>
-                {this.props.campusList.length === 0? <h3>No Campuses to Display</h3> : <div>{singleCampus}</div> } 
+                <div id="add-campus"><button onClick={this.addNewCampus}>Add Campus</button></div>
+                {this.props.CampusList.length === 0? <h3>There are no campuses to display</h3> : <div className="campus-wrapper">{singleCampus}</div> } 
             </div>
         )
     }
 }
 
+function mapStateToProps(state){
+    return{
+        CampusList: state.CampusList,
+        StudentList:state.StudentList,
+        CurrentCampus: state.CurrentCampus
+    }
+}
 
-export default Campuses;
+ function mapDispatchToProps(dispatch){
+     return {
+         request_campus_list: () => dispatch(getAllCampusesThunk()),
+         add_campus: () => dispatch(addCampusThunk()),
+     }
+ }
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Campuses);

@@ -1,4 +1,6 @@
-import { createStore } from 'redux';
+import { createStore,applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import {composeWithDevTools} from 'redux-devtools-extension';
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
@@ -6,9 +8,10 @@ export default function configureStore(initialState) {
     //creatStore function creates the store
     const store = createStore(
     rootReducer, //rootReducer updates our state tree 
-    initialState,
-    //allows Redux dev tools extention to acess our store 
-    window.devToolsExtension ? window.devToolsExtension() : undefined
+    composeWithDevTools(
+      applyMiddleware(thunk)
+    ),
+    /*window.devToolsExtension ? window.devToolsExtension() : undefined*/
   );
 
   //boiler plate 
