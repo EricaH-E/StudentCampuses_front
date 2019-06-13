@@ -8,10 +8,10 @@ class StudentEdit extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            first: this.props.student.first_name,
-            last: this.props.student.last_name,
+            firstName: this.props.student.firsName,
+            lastName: this.props.student.lastName,
             email: this.props.student.email,
-            image: this.props.student.image,
+            image: this.props.student.imageUrl,
             gpa: this.props.student.gpa,
         }
     }
@@ -20,14 +20,15 @@ class StudentEdit extends React.Component{
           [event.target.name]: event.target.value
         });
       }
-    save = () =>{
+    save = (event) =>{
+        event.preventDefault();
         let update = this.state;
         this.props.grabChanges(update);
     }
 
     render(){
     const email  = this.props.student.email === ' '? "input email here" : this.props.student.email;
-    const gpa  = this.props.student.gpa === ' '? "input GPA here" : this.props.student.description;
+    const gpa  = this.props.student.gpa === ' '? "input GPA here" : this.props.student.gpa;
     return(
         <div>
         <header>
@@ -37,11 +38,11 @@ class StudentEdit extends React.Component{
         </header>
         <form>
             <label> First Name:
-            <input type="text" name="first" placeholder={this.props.student.first_name}  onChange={this.handleChange} />
+            <input type="text" name="first" placeholder={this.props.student.firstName}  onChange={this.handleChange} />
             </label>
             <br />
             <label> Last Name:
-            <input type="text"  name="last" placeholder={this.props.student.last_name}  onChange={this.handleChange} />
+            <input type="text"  name="last" placeholder={this.props.student.lastName}  onChange={this.handleChange} />
             </label>
             <br />
             <label>Email:
@@ -55,7 +56,7 @@ class StudentEdit extends React.Component{
             </label>
             <br />
             <label>GPA:
-            <input type="number"  name="gpa" placeholder={gpa} onChange={this.handleChange} />
+            <input type="number" step="0.01"  name="gpa" placeholder={gpa} onChange={this.handleChange} />
             </label>
             <br />
             <button onClick={this.save}>Save</button>

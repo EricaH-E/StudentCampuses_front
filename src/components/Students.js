@@ -25,7 +25,8 @@ class Students extends React.Component{
     }
 
     handleSubmit = (obj) =>{
-            this.props.add_student();
+            console.log("editted", obj);
+            this.props.add_student(obj);
             this.setState({newStudent: false});
             this.setState({redirect: true});
     }
@@ -41,7 +42,7 @@ class Students extends React.Component{
             )
         }
         if(this.state.redirect){
-           return( <Redirect to={`Students/${this.props.student}`} /> )
+           return( <Redirect to={`Students/${this.props.CurrentStudent.id}`} /> )
         }
         const singleStudent= this.props.StudentList.map(student=>{
             return(
@@ -79,7 +80,7 @@ function mapStateToProps(state){
  function mapDispatchToProps(dispatch){
      return {
          request_student_list: () => dispatch(getAllStudentsThunk()),
-         add_student: () => dispatch(addStudentThunk()),
+         add_student: (obj) => dispatch(addStudentThunk(obj)),
      }
  }
 

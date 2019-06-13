@@ -1,4 +1,5 @@
 import React from 'react';
+import def from '../imgs/def.png';
 import NavBar from './navbar.js';
 
 
@@ -7,10 +8,10 @@ class AddStudent extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            first_name: ' ',
-            last_name: ' ',
+            firstName: ' ',
+            lastName: ' ',
             email: ' ',
-            imageUrl: ' ',
+            imageUrl: def,
             gpa: ' '
         }
     }  
@@ -21,8 +22,10 @@ class AddStudent extends React.Component{
         });
       }
 
-      submitted = () => {
+      submitted = (event) => {
+          event.preventDefault();
           let  newstudent=  this.state;
+          console.log("form", newstudent)
           this.props.submit(newstudent);
       }
 
@@ -35,17 +38,17 @@ class AddStudent extends React.Component{
             <br />
             <NavBar />
             </header>
-        <form>
+        <form onSubmit={this.submitted}>
             <label> First Name:
-            <input type="text" name="first_name"  required/>
+            <input type="text" name="firstName" onChange={this.handleChange} required/>
             </label>
             <br />
             <label> Last Name:
-            <input type="text"  name="last_name"  required/>
+            <input type="text"  name="lastName" onChange={this.handleChange}  required/>
             </label>
             <br />
             <label>Email:
-            <input type="email"  name="email" />
+            <input type="email"  name="email"  onChange={this.handleChange} />
             </label>
             <br />
             <label>Image:
@@ -55,7 +58,7 @@ class AddStudent extends React.Component{
             </label>
             <br />
             <label>GPA:
-            <input type="number"  name="gpa" required/>
+            <input type="number"  step="0.01" name="gpa"  onChange={this.handleChange} required/>
             </label>
             <br />
             <input type="submit" value="SUBMIT" /> <button onClick={this.props.cancel}>CANCEL</button>

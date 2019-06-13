@@ -32,7 +32,7 @@ class Campuses extends React.Component{
     }
     
     handleSubmit = (obj) =>{
-        this.props.add_campus();
+        this.props.add_campus(obj);
         this.setState({addCampus: false});
         this.setState({redirect: true});
         
@@ -49,14 +49,15 @@ class Campuses extends React.Component{
                 <AddCampus  cancel={this.handleCancel}  submit={this.handleSubmit}/>
             )
         }
-        if(this.state.redirect){
-            return(<Redirect to={`Campuses/${this.props.campus}`} /> )
-        }
+        /*if(this.state.redirect){
+            return(<Redirect to={`Campuses/${this.props.CurrentCampus.id}`} /> )
+        }*/
 
            const singleCampus= this.props.CampusList.map(campus=>{
+               const {id} = campus || ''
                return(
              <Link
-             key={campus.id}
+              key={campus.id}
               to={`/Campuses/${campus.id}`}>
                 <CampusView campus={campus} test="test" />
             </Link>
@@ -88,7 +89,7 @@ function mapStateToProps(state){
  function mapDispatchToProps(dispatch){
      return {
          request_campus_list: () => dispatch(getAllCampusesThunk()),
-         add_campus: () => dispatch(addCampusThunk()),
+         add_campus: (obj) => dispatch(addCampusThunk(obj)),
      }
  }
 

@@ -124,7 +124,7 @@ export const editCampusThunk = (id, update) => (dispatch)=>{
     axios.patch(`/campus/${id}`, update)
     .then(result => result.data)
     .then(data => dispatch(edit_campus(data))) //should return single campus from back end
-    .then(data => dispatch(request_campus(data.id)))
+   .then(data => dispatch(request_campus(data)) )
     .catch(error => console.log(error));
 }
 
@@ -153,10 +153,11 @@ export const getSingleStudentThunk = (id) =>(dispatch)=>{
 }
 
 export const addStudentThunk = (newStudent)=> (dispatch)=>{
+    console.log("thunk",newStudent)
     axios.post('/student', newStudent)
     .then(result => result.data)
-    .then(data => dispatch(add_student(data[0])))
-    .then(data => dispatch(request_student(data[1])))
+    .then(data => dispatch(add_student(data)))
+    .then(data => dispatch(request_student(data)))
     .catch(error => console.log(error));
 
 }
@@ -165,7 +166,7 @@ export const editStudentThunk = (id, update) => (dispatch)=>{
     axios.put(`/student/${id}`, update)
     .then(result => result.data)
     .then(data => dispatch(edit_student(data))) //should return single campus from back end
-    .then(data => dispatch(request_student(data.id)))
+    .then(data => dispatch(request_student(data)))
     .catch(error => console.log(error));
 
 } 
