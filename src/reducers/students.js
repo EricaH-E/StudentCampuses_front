@@ -1,7 +1,7 @@
 import {REQUEST_STUDENT_LIST, ADD_STUDENT, DELETE_STUDENT} from '../actions/index'
 
 
-const initialState ={
+/*const initialState ={
     data: [
         {
             id: 1, 
@@ -19,16 +19,14 @@ const initialState ={
             last_name: 'Hutcherson'
         }
     ]
-}
+}*/
 
 /* reducer for all Students */
 
-export default function(state = initialState, action){
+export default function(state = [], action){
     switch(action.type){
         case REQUEST_STUDENT_LIST:
-                return {
-                    ...state, data: action.payload.data
-                  };
+                return action.payload
         case ADD_STUDENT:
             return action.payload;
 

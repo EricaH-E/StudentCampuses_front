@@ -9,7 +9,7 @@ class AddCampus extends React.Component{
             this.setState ={
                 name: '',
                 address: '',
-                image: '',
+                imageUrl: '',
                 description: ''
             }
         }
@@ -20,9 +20,16 @@ class AddCampus extends React.Component{
         });
       }
 
-      submitted = () => {
+      submitted = (event) => {
+        event.preventDefault();
+        let emailregex= RegExp('^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$');
+        if( this.state.name === '' || this.state.address === ''){
+            alert('Campus Name and address be filled out befor submitting New campus');
+        }
+        else{
           let  newcampus=  this.state;
           this.props.submit(newcampus);
+        }
       }
 
     render(){
@@ -37,20 +44,20 @@ class AddCampus extends React.Component{
         <br />
         <form  onSubmit={this.submitted}>
         <label>Name:{" "}
-            <input type="text" name="name"  />
+            <input type="text" name="name"  required />
          </label>
 
          <br />
 
             <label>Address:{" "}
-            <input type="text"  name = "address"/>
+            <input type="text"  name = "address" required/>
             </label>
 
             <br />
 
             <label>Image:{" "}
             <select>
-                <option value="default" name="image">default</option>
+                <option value="default" name="imageUrl">default</option>
             </select>
             
             </label>

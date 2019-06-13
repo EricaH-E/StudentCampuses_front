@@ -5,6 +5,8 @@ import '../styles/App.css';
 import CampusView from '../views/CampusView';
 import def from '../imgs/def.png';
 import AddCampus from './AddCampus';
+import {connect} from 'react-redux';
+import {getAllCampusesThunk, addCampusThunk }from '../actions/index';
   
 class Campuses extends React.Component{
     constructor(props){
@@ -18,7 +20,7 @@ class Campuses extends React.Component{
             } 
   }
   componentDidMount(){
-      this.props.actions.getAllCampusesThunk();
+      this.props.request_campus_list();
   }
     addNewCampus = () => {
         this.setState({addCampus: true});
@@ -29,11 +31,12 @@ class Campuses extends React.Component{
     }
     
     handleSubmit = (obj) =>{
-        this.props.actions.addCampusThunk(obj);
+        this.props.add_campus();
         this.setState({addCampus: false});
         this.setState({redirect: true});
         
     }
+
     
     handleCancel = () =>{
         this.setState({addCampus: false});
@@ -49,7 +52,7 @@ class Campuses extends React.Component{
             return(<Redirect to={`Campuses/${this.props.campus}`} /> )
         }
 
-           const singleCampus= this.props.campusList.map(campus=>{
+           const singleCampus= this.props.CampusList.map(campus=>{
                return(
              <Link
              key={campus.id}
@@ -67,11 +70,27 @@ class Campuses extends React.Component{
                      <NavBar />  
                 </header>
                 <div id="add-campus"><button onClick={this.addNewCampus}>Add Campus</button></div>
-                {this.props.campusList.length === 0? <h3>There are no campuses to display</h3> : <div className="campus-wrapper">{singleCampus}</div> } 
+                {this.props.CampusList.length === 0? <h3>There are no campuses to display</h3> : <div className="campus-wrapper">{singleCampus}</div> } 
             </div>
         )
     }
 }
 
+function mapStateToProps(state){
+    return{
+        CampusList: state.CampusList,
+        StudentList:state.StudentList,
+        CurrentCampus: state.CurrentCampus
+    }
+}
 
-export default Campuses;
+ function mapDispatchToProps(dispatch){
+     return {
+         request_campus_list: () => dispatch(getAllCampusesThunk()),
+         add_campus: () => dispatch(addCampusThunk()),
+     }
+ }
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Campuses);

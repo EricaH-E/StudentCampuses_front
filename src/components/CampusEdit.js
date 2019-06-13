@@ -9,7 +9,7 @@ class  CampusEdit extends React.Component {
         this.state = {
             name: this.props.campus.name,
             address: this.props.campus.address,
-            image: this.props.campus.image,
+            imageUrl: this.props.campus.image,
             description: this.props.campus.description
         }
     }
@@ -46,7 +46,7 @@ class  CampusEdit extends React.Component {
             <br />
             <label>Image:
             <select>
-               <option value="default" name="image" onChange={this.handleChange}>default</option>
+               <option value="default" name="imageUrl" onChange={this.handleChange}>default</option>
             </select>
             </label>
             <br />

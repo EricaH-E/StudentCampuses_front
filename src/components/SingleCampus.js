@@ -3,6 +3,8 @@ import def from '../imgs/def.png'
 import NavBar from '../components/navbar';
 import {withRouter} from 'react-router';
 import CampusEdit from './CampusEdit';
+import {connect}  from 'react-redux';
+import {editCampusThunk, deleteCampusThunk, getSingleCampusThunk} from '../actions/index';
 
 class SingleCampus extends React.Component{
     constructor(props){
@@ -16,7 +18,7 @@ class SingleCampus extends React.Component{
     componentDidMount(){
         const {id} = this.props.match.params;
         this.setState({currentId :id})
-        this.props.actions.getSingleCampusThunk(id);
+        this.props.request_campus(id);
     }
 
     triggerEdit = () =>{
@@ -29,12 +31,12 @@ class SingleCampus extends React.Component{
 
     handleDelete = () =>{
         /*trigger delete thunk */
-        this.props.actions.deleteCampusThunk(this.state.currentId);
+        this.props.delete_campus(this.state.currentId);
     }
 
     handleEdit = (obj) =>{
         /*trigger edit thunk and pass object */
-        this.props.actions.editCampusThunk(this.state.currentId, obj);
+        this.props.edit_campus(this.state.currentId, obj);
     }
 
     render(){
@@ -75,11 +77,30 @@ class SingleCampus extends React.Component{
     }
 }
 
+function mapStateToProps(state){
+    return{
+        CurrentCampus: state.CurrentCampus,
+        StudentList: state.StudentList
+
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+        request_campus: (id) => dispatch(getSingleCampusThunk(id)),
+        edit_campus: (id, update) => dispatch(editCampusThunk(id,update)),
+        delete_campus: (id) => dispatch(deleteCampusThunk(id))
+
+    }
+}
+
+
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(SingleCampus));
+
 //if no students assigned to campus render no students assigned
 
 // export default SingleCampus;
-export default withRouter(SingleCampus);
-
 // mapping students to this campus  via filter & find
 
 /* let students= this.props.studentList.filter(student => student.campusId === this.state.currentId)

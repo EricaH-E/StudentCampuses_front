@@ -3,6 +3,8 @@ import def from '../imgs/def.png'
 import NavBar from '../components/navbar';
 import {withRouter} from 'react-router';
 import StudentEdit from './StudentEdit'
+import {connect} from 'react-redux';
+import {getSingleStudentThunk, editStudentThunk, deleteStudentThunk}from '../actions/index';
 
 class SingleStudent extends React.Component{
     constructor(props){
@@ -18,7 +20,7 @@ class SingleStudent extends React.Component{
     componentDidMount(){
         const {id} = this.props.match.params
         this.setState({currentId: id})
-        this.props.actions.getSingleStudentThunk (id);
+        this.props.request_student(id);
     }
 
     triggerEdit = () =>{
@@ -31,12 +33,12 @@ class SingleStudent extends React.Component{
 
     handleDelete = () =>{
         /*trigger delete thunk*/
-        this.props.actions.deleteStudentThunk (this.state.currentId);
+        this.props.delete_student(this.state.currentId);
     }
 
     handleEdit = (obj) =>{
         /*trigger edit thunk and pass object */
-        this.props.actions.editStudentThunk(this.state.currentId, obj);
+        this.props.edit_student(this.state.currentId, obj);
         //if success
         this.setState({redirect: true});
     }
@@ -75,10 +77,26 @@ class SingleStudent extends React.Component{
     }
 }
 
+function mapStateToProps(state){
+    return{
+        CurrentStudent: state.CurrentStudent,
+        CampusList: state.CampusList
+    }
+}
+
+function mapDispatchToProps(dispatch){
+        return{
+            request_student: (id) => dispatch(getSingleStudentThunk(id)),
+            edit_student: (id, update) => dispatch(editStudentThunk(id,update)),
+            delete_student: (id) => dispatch(deleteStudentThunk(id))
+            
+        }
+}
+
+
+export default  withRouter(connect(mapStateToProps,mapDispatchToProps)(SingleStudent));
+
 /* if student campus_id foreign key is null render no campus assigned*/
-
-export default withRouter(SingleStudent);
-
 //campus finder
 /*
     let campus;

@@ -1,6 +1,6 @@
 import {ADD_CAMPUS, REQUEST_CAMPUS_LIST, DELETE_CAMPUS} from '../actions/index';
 
-const initialState ={ 
+/*const initialState ={ 
   data: [{ 
      id: 1,
      name:"Campus1", 
@@ -16,10 +16,10 @@ const initialState ={
    }
 
  ] 
-}
+}*/
 
 /* campuses reducer  for all actions related to campuses */
-export default function(state= initialState, action){
+export default function(state= [], action){
     switch(action.type){
       case  REQUEST_CAMPUS_LIST:
        return {

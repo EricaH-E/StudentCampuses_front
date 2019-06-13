@@ -7,10 +7,25 @@ class AddStudent extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            first: ' ',
-            last: ' ',
+            first_name: ' ',
+            last_name: ' ',
+            email: ' ',
+            imageUrl: ' ',
+            gpa: ' '
         }
-    }
+    }  
+
+    handleChange = event => {
+        this.setState({
+          [event.target.name]: event.target.value
+        });
+      }
+
+      submitted = () => {
+          let  newstudent=  this.state;
+          this.props.submit(newstudent);
+      }
+
 
     render(){
     return(
@@ -22,28 +37,28 @@ class AddStudent extends React.Component{
             </header>
         <form>
             <label> First Name:
-            <input type="text"  />
+            <input type="text" name="first_name"  required/>
             </label>
             <br />
             <label> Last Name:
-            <input type="text"   />
+            <input type="text"  name="last_name"  required/>
             </label>
             <br />
             <label>Email:
-            <input type="email"  />
+            <input type="email"  name="email" />
             </label>
             <br />
             <label>Image:
             <select>
-                 <option value="default">default</option>
+                 <option value="default" name="imageUrl">default</option>
             </select>
             </label>
             <br />
             <label>GPA:
-            <input type="number" />
+            <input type="number"  name="gpa" required/>
             </label>
             <br />
-            <input type="submit" value="SUBMIT" /> <button>CANCEL</button>
+            <input type="submit" value="SUBMIT" /> <button onClick={this.props.cancel}>CANCEL</button>
         </form>
     </div>
     )

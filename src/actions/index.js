@@ -22,7 +22,7 @@ export const REQUEST_STUDENT = 'REQUEST_STUDENT';
 export function request_campus(obj){
     return {
         type: REQUEST_CAMPUS,
-        payload:obj
+        payload: obj
     }
 }
 
