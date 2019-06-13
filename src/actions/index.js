@@ -121,7 +121,7 @@ export const addCampusThunk = (newCampus)=> (dispatch)=>{
 }
 
 export const editCampusThunk = (id, update) => (dispatch)=>{
-    axios.put(`/campus/${id}`, update)
+    axios.patch(`/campus/${id}`, update)
     .then(result => result.data)
     .then(data => dispatch(edit_campus(data))) //should return single campus from back end
     .then(data => dispatch(request_campus(data.id)))

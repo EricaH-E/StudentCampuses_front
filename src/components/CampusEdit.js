@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import NavBar from './navbar.js';
 
 /* edits a campus*/
@@ -10,7 +11,9 @@ class  CampusEdit extends React.Component {
             name: this.props.campus.name,
             address: this.props.campus.address,
             imageUrl: this.props.campus.image,
-            description: this.props.campus.description
+            description: this.props.campus.description,
+            redirect: false
+
         }
     }
 
@@ -19,15 +22,24 @@ class  CampusEdit extends React.Component {
           [event.target.name]: event.target.value
         });
       }
-    save = () =>{
+    save = (event) =>{
+        event.preventDefault();
         let update = this.state;
-        this.props.grabChanges(update);
+        delete update.redirect;
+        console.log(update);
+       this.props.grabChanges(update);
+       this.setState({redirect: true})
     }
 
 
     render(){
     const address  = this.props.campus.address === ' '? "input address here" : this.props.campus.address;
     const description  = this.props.campus.description === ' '? "input address here" : this.props.campus.description;
+
+    if(this.state.redirect){
+        return(<Redirect to={`Campuses/${this.props.campus.id}`} /> )
+    }
+
     return(
         <div>
         <header>
@@ -54,7 +66,7 @@ class  CampusEdit extends React.Component {
             <input type="text" name="description"  placeholder={description} onChange={this.handleChange}/>
             </label>
             <br />
-            <button>Save</button>
+            <button onClick={this.save}>Save</button>
         </form>
         </div>
     )

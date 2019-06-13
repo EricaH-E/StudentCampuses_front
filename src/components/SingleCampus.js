@@ -43,7 +43,7 @@ class SingleCampus extends React.Component{
     render(){
         if(this.state.edit){
             return( 
-                <CampusEdit  campus={this.props.CurrentCampus}  grabChanges={this.state.handleEdit}/>
+                <CampusEdit  campus={this.props.CurrentCampus}  grabChanges={this.handleEdit}/>
             )
         }
 
