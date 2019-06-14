@@ -3,7 +3,7 @@ import def from '../imgs/def.png'
 import '../styles/App.css';
 
 const StudentView = (props) => {
-      console.log(props.student);
+ let image =  props.student.imageUrl === ""? def : props.student.imageUrl;
     return(
           <div className="multi-view">
             <img src={def} alt="student"></img>

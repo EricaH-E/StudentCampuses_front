@@ -19,6 +19,7 @@ class Students extends React.Component{
     componentDidMount(){
         //call request student list thunk
         this.props.request_student_list();
+        console.log(this.props.StudentList);
     }
     addNewStudent = () =>{
         this.setState({newStudent: true});
