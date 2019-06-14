@@ -41,7 +41,6 @@ class SingleStudent extends React.Component{
     handleEdit = (obj) =>{
         /*trigger edit thunk and pass object */
         this.props.edit_student(this.state.currentId, obj);
-        //if success
         this.setState({redirect: true});
     }
 
@@ -60,6 +59,10 @@ class SingleStudent extends React.Component{
                 <Redirect to="/Students" />
             )
         }
+
+        if(this.state.redirect){
+            return( <Redirect to={`Students/${this.props.CurrentStudent.id}`} /> )
+         }
 
         
         return(
