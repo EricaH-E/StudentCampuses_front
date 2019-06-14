@@ -70,12 +70,12 @@ class SingleStudent extends React.Component{
                 <header>
                     <NavBar />
                 </header>
-            <div className="multi-view">
-              <img src={imageUrl} alt="student"></img>
+            <div className="individual-view">
+              <img className="single-img" src={imageUrl} alt="student"></img>
               <h3>{this.props.CurrentStudent.firstName}{" "}{this.props.CurrentStudent.lastName}</h3>
               <p> GPA: {this.props.CurrentStudent.gpa}</p>
               <p>Email: {this.props.CurrentStudent.email}</p>
-             <button onClick={this.triggerEdit}>EDIT</button> <button onClick={this.triggerDelete}>DELETE</button>
+             <button className="single-view" onClick={this.triggerEdit}>EDIT</button> <button className="single-view" onClick={this.triggerDelete}>DELETE</button>
           </div>
           <br />
           <button>ADD/CHANGE CAMPUS</button>

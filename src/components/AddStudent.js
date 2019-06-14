@@ -37,7 +37,7 @@ class AddStudent extends React.Component{
             <br />
             <NavBar />
             </header>
-        <form onSubmit={this.submitted}>
+        <form onSubmit={this.submitted} className="Student-form">
             <label> First Name:
             <input type="text" name="firstName" onChange={this.handleChange} required/>
             </label>
