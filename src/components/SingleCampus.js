@@ -60,7 +60,7 @@ class SingleCampus extends React.Component{
             <header>
                 <NavBar />
             </header>
-            <div className="multi-view">
+            <div className="individual-view">
               <h3>{this.props.CurrentCampus.name}</h3>
               <img src={def} alt="campus"></img>
               <p>Address: {this.props.CurrentCampus.address}</p>
